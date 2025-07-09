@@ -22,6 +22,14 @@ app.post('/api/match', (req, res) => {
   }
 });
 
-app.listen(4000, () => {
-  console.log('Server listening on port 4000');
+//actual one
+// app.listen(4000, () => {
+//   console.log('Server listening on port 4000');
+// });
+
+//updated one
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server listening on port ${PORT}`);
 });
