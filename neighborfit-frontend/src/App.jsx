@@ -19,7 +19,8 @@ export default function App() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  /*//actual code
+    const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -37,7 +38,28 @@ export default function App() {
     } finally {
       setLoading(false);
     }
-  };
+  };*/
+
+  //my code
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
+  try {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/match`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    if (!res.ok) throw new Error('Failed to fetch matches');
+    const data = await res.json();
+    setResults(data);
+  } catch (err) {
+    setError(err.message || 'Unknown error');
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div
